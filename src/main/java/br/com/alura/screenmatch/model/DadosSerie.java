@@ -7,8 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record DadosSerie(@JsonAlias("Title") String titulo,
                          @JsonAlias("totalSeasons") Integer totalTemporadas,
-                         @JsonAlias("imdbRating") String avaliacao,
-                         @JsonProperty("imdbVotes") String votos) {
+                         @JsonAlias("imdbRating") String avaliacao
+//                         @JsonProperty("imdbVotes") String votos
+                         ) {
 }
 //@JsonAlias() é utilizado dentro do record para setar o nome original do campo do json (Title, totalSeasons, imdbRating) com
 // o nome dos dados de interesse do Record(titulo, totalTemporadas e avaliacao), porém, na hora que for obter os dados
