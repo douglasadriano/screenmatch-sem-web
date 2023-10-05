@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch;
 
+import br.com.alura.screenmatch.model.DadosEpisodios;
 import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.service.ConsumoAPI;
 import br.com.alura.screenmatch.service.ConverteDados;
@@ -20,18 +21,25 @@ public class ScreenmatchApplication implements CommandLineRunner  {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Primeiro projeto Spring sem Web.");
-		var consumoAPI = new ConsumoAPI();
-		Scanner leitura = new Scanner(System.in);
-		System.out.println("Digite o nome da série: ");
-		var nomeSerie = leitura.nextLine().replace(" ", "+");
-		String endereco = "https://www.omdbapi.com/?t=" + nomeSerie +"&apikey=d3f5c35f";
-		var json = consumoAPI.obterDados(endereco);
-		//System.out.println(json);
-		//json = consumoAPI.obterDados("https://coffee.alexflipnote.dev/random.json");
-		System.out.println(json);
-		ConverteDados conversor = new ConverteDados();
-		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-		System.out.println(dados);
+		try {
+			System.out.println("Primeiro projeto Spring sem Web.");
+			var consumoAPI = new ConsumoAPI();
+			Scanner leitura = new Scanner(System.in);
+			System.out.println("Digite o nome da série: ");
+			var nomeSerie = leitura.nextLine().replace(" ", "+");
+			String endereco = "https://www.omdbapi.com/?t=" + nomeSerie + "&apikey=d3f5c35f";
+			var json = consumoAPI.obterDados(endereco);
+			//System.out.println(json);
+			//json = consumoAPI.obterDados("https://coffee.alexflipnote.dev/random.json");
+			System.out.println(json);
+			ConverteDados conversor = new ConverteDados();
+			DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+			System.out.println(dados);
+			json = consumoAPI.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=6585022c");
+			DadosEpisodios dadosEpisodios = conversor.obterDados(json, DadosEpisodios.class);
+			System.out.println(dadosEpisodios);
+		} catch (Exception e){
+			System.out.println("Nada ainda.");
+		}
 	}
 }
