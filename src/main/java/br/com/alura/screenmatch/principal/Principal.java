@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
 
@@ -55,5 +56,9 @@ public class Principal {
 //                    .filter(n -> n.startsWith("I")) //pega todos os nomes que começam com a letra I
 //                    .map (n -> n.toUpperCase()) //pega o resultado e coloca tudo como letra maiuscula
 //                    .forEach(System.out::println); //imprime o resultado
+
+        List<DadosEpisodios> dadosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())
+                .collect(Collectors.toList());
     }
 }
